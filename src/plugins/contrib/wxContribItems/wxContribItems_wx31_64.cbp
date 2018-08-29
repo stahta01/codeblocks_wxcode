@@ -4,13 +4,20 @@
 	<Project>
 		<Option title="wxWidgets - Contrib Items wx3.1.x (64 bit)" />
 		<Option platforms="Windows;" />
-		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
+			<Target title="pch">
+				<Option output="dummy" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+			</Target>
 			<Target title="wxFlatNoteBook">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxflatnotebook" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxFlatNotebook" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -22,7 +29,7 @@
 			<Target title="wxDateTimePicker">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxdatetimepicker" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxDateTimePicker" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -34,7 +41,7 @@
 			<Target title="wxChartCtrl">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxchartctrl" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxChartCtrl" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -46,7 +53,7 @@
 			<Target title="wxCustomButton">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxcustombutton" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxthings" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -58,7 +65,7 @@
 			<Target title="wxImagePanel">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wximagepanel" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxImagePanel" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -72,7 +79,7 @@
 			<Target title="wxSpeedButton">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxspeedbutton" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxSpeedButton" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -83,7 +90,7 @@
 			<Target title="wxKWIC">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxkwic" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/KWIC" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -97,11 +104,12 @@
 			<Target title="wxLED">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxled" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxled" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-DWXMAKINGDLL_GIZMOS" />
 					<Add directory="wxled/ledpanel/include" />
 					<Add directory="wxled/lcdWindow/include" />
 					<Add directory="wxled/led/include" />
@@ -114,7 +122,7 @@
 			<Target title="wxMathPlot">
 				<Option platforms="Windows;" />
 				<Option output="../../../devel31_64/wxmathplot" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems/wxmathplot" />
+				<Option object_output="../../../.objs31_64/plugins/contrib/wxContribItems" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createStaticLib="1" />
@@ -132,7 +140,7 @@
 			</Environment>
 		</Build>
 		<VirtualTargets>
-			<Add alias="All" targets="wxFlatNoteBook;wxDateTimePicker;wxChartCtrl;wxCustomButton;wxImagePanel;wxSpeedButton;wxKWIC;wxLED;wxMathPlot;" />
+			<Add alias="All" targets="pch;wxFlatNoteBook;wxDateTimePicker;wxChartCtrl;wxCustomButton;wxImagePanel;wxSpeedButton;wxKWIC;wxMathPlot;wxLED;" />
 		</VirtualTargets>
 		<Compiler>
 			<Add option="$(#CB_RELEASE_TYPE)" />
@@ -140,14 +148,17 @@
 			<Add option="-mthreads" />
 			<Add option="-fmessage-length=0" />
 			<Add option="-fexceptions" />
-			<Add option="-DHAVE_W32API_H" />
+			<Add option="-std=gnu++11" />
+			<Add option="-Winvalid-pch" />
+			<Add option='-include &quot;wx_pch.h&quot;' />
 			<Add option="-D__WXMSW__" />
 			<Add option="-D_WIN64" />
-			<Add option="-DWXMAKINGDLL" />
+			<Add option="-DWXUSINGDLL" />
 			<Add option="-DwxUSE_UNICODE" />
-			<Add option="-std=gnu++11" />
+			<Add option="-DUSE_PCH" />
 			<Add directory="$(#WX31_64.include)" />
 			<Add directory="$(#WX31_64.lib)/gcc_dll$(WX_CFG)/msw$(WX_SUFFIX)" />
+			<Add directory="pch" />
 		</Compiler>
 		<Linker>
 			<Add option="-Wl,--enable-auto-import" />
@@ -244,6 +255,10 @@
 		</Unit>
 		<Unit filename="KWIC/src/wx/xrc/xh_kwxlinearregulatorhandler.cpp">
 			<Option target="wxKWIC" />
+		</Unit>
+		<Unit filename="pch/wx_pch.h">
+			<Option compile="1" />
+			<Option target="pch" />
 		</Unit>
 		<Unit filename="wxDateTimePicker/images/DateTime.xpm">
 			<Option target="wxDateTimePicker" />
