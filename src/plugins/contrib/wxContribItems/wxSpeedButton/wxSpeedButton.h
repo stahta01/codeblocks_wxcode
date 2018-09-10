@@ -19,15 +19,14 @@
 * You should have received a copy of the GNU General Public License
 * along with wxSmith; if not, write to the Free Software
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
-* 
+*
 * Ron Collins
 * rcoll@theriver.com
 * 4-Feb-2010
-* 
+*
 */
 
 #include "wx/defs.h"
-#include "wx/wxprec.h"
 #include "wx/control.h"
 #include "wx/settings.h"
 #include "wx/bitmap.h"
